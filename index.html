@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 4 - For A Better Community (Buổi 2)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --primary: #1a73e8;
+    --primary-dark: #1557b0;
+    --primary-light: #e8f0fe;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --correct: #16a34a;
+    --correct-bg: #dcfce7;
+    --wrong: #dc2626;
+    --wrong-bg: #fee2e2;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Google Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+  }
+
+  /* HEADER */
+  header {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .badge-unit {
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .brand h1 {
+    font-size: 18.5px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 6px;
+    background: #f1f5f9;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .tab-btn:hover {
+    color: var(--text);
+    background: rgba(255,255,255,0.7);
+  }
+
+  .tab-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 2px 5px rgba(26, 115, 232, 0.25);
+  }
+
+  /* MAIN CONTAINER */
+  main {
+    max-width: 1120px;
+    width: 100%;
+    margin: 24px auto;
+    padding: 0 20px 60px;
+    flex: 1;
+  }
+
+  .tab-panel {
+    display: none;
+    animation: fadeIn 0.25s ease;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .section-desc {
+    font-size: 14.5px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .btn-sm {
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    background: #f8fafc;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-sm:hover {
+    background: #e2e8f0;
+  }
+
+  .btn-sm.primary {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border-color: #bfdbfe;
+  }
+
+  .btn-sm.primary:hover {
+    background: #dbeafe;
+  }
+
+  /* PASSAGE READING BOX */
+  .passage-box {
+    background: #f8fafc;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 22px 26px;
+    margin-bottom: 22px;
+    font-size: 16px;
+    line-height: 1.85;
+    color: #0f172a;
+    text-align: justify;
+  }
+
+  .passage-title {
+    font-weight: 800;
+    font-size: 17.5px;
+    color: #0f172a;
+    text-align: center;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  .passage-box p {
+    margin-bottom: 14px;
+    text-indent: 24px;
+  }
+
+  .passage-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .blank-tag {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-weight: 700;
+    padding: 0 8px;
+    border-radius: 5px;
+    border-bottom: 2px solid var(--primary);
+    font-size: 14.5px;
+    text-indent: 0;
+  }
+
+  /* QUESTION CARDS */
+  .q-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    background: #ffffff;
+    transition: border-color 0.2s;
+  }
+
+  .q-card:hover {
+    border-color: #cbd5e1;
+  }
+
+  .q-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .q-label {
+    font-weight: 700;
+    color: #0f172a;
+    font-size: 16px;
+  }
+
+  .opts-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .opts-grid-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .opt-btn {
+    padding: 10px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: #f8fafc;
+    transition: all 0.15s;
+    text-align: left;
+  }
+
+  .opt-btn:hover {
+    background: #eff6ff;
+    border-color: #93c5fd;
+  }
+
+  .opt-btn.correct {
+    background: var(--correct-bg) !important;
+    border-color: var(--correct) !important;
+    color: var(--correct) !important;
+    font-weight: 700;
+  }
+
+  .opt-btn.wrong {
+    background: var(--wrong-bg) !important;
+    border-color: var(--wrong) !important;
+    color: var(--wrong) !important;
+  }
+
+  .exp-box {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 7px;
+    background: #f0fdf4;
+    border-left: 4px solid var(--correct);
+    color: #166534;
+    font-size: 14.5px;
+    display: none;
+  }
+
+  .exp-box.show {
+    display: block;
+  }
+
+  /* COLLAPSIBLE VOCABULARY ACCORDION */
+  .vocab-accordion {
+    margin-top: 24px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .vocab-toggle-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(to right, #eff6ff, #f8fafc);
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    transition: background 0.2s;
+  }
+
+  .vocab-toggle-btn:hover {
+    background: #dbeafe;
+  }
+
+  .vocab-arrow {
+    font-size: 14px;
+    transition: transform 0.25s ease;
+  }
+
+  .vocab-accordion.open .vocab-arrow {
+    transform: rotate(180deg);
+  }
+
+  .vocab-content {
+    display: none;
+    padding: 18px 20px;
+    border-top: 1px solid #e2e8f0;
+    overflow-x: auto;
+  }
+
+  .vocab-accordion.open .vocab-content {
+    display: block;
+    animation: fadeIn 0.2s ease;
+  }
+
+  table.vocab-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+
+  table.vocab-table th {
+    background: #f1f5f9;
+    color: #1e293b;
+    font-weight: 700;
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 2px solid #cbd5e1;
+  }
+
+  table.vocab-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  table.vocab-table tr:hover td {
+    background: #f8fafc;
+  }
+
+  .pos-pill {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 12.5px;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+
+  .speak-btn {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    padding: 3px 8px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-left: 6px;
+  }
+
+  .speak-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  @media (max-width: 768px) {
+    .opts-grid-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <span class="badge-unit">UNIT 4 &bull; BUỔI 2</span>
+      <h1>FOR A BETTER COMMUNITY – HANDOUT</h1>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-btn-1" onclick="switchTab(1)">Bài A1: Cloze Text 1 (1–5)</button>
+      <button class="tab-btn" id="tab-btn-2" onclick="switchTab(2)">Bài A2: Cloze Text 2 (6–10)</button>
+      <button class="tab-btn" id="tab-btn-3" onclick="switchTab(3)">Bài B: Phrase/Clause Cloze (1–5)</button>
+      <button class="tab-btn" id="tab-btn-4" onclick="switchTab(4)">Bài C: Reading Comprehension (1–5)</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= TAB 1: PASSAGE 1 ================= -->
+    <section id="panel-1" class="tab-panel active">
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">A. READING – GUIDED CLOZE TEXT (Passage 1)</div>
+            <div class="section-desc">Bấm vào đáp án A, B, C hoặc D ở từng câu để kiểm tra kết quả ngay lập tức.</div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-sm primary" onclick="revealAllInTab(1, true)">👁️ Hiện tất cả đáp án</button>
+            <button class="btn-sm" onclick="revealAllInTab(1, false)">🔄 Làm lại</button>
+          </div>
+        </div>
+
+        <div class="passage-box">
+          <div class="passage-title">WEEKEND VOLUNTEERS AT SUNSHINE SHELTER</div>
+          <p>
+            Every Sunday morning, a group of tenth-grade students from our high school visits Sunshine Shelter, a local home for <span class="blank-tag">(1) _______</span> children. Instead of sleeping in or playing video games, these teenagers spend four hours tutoring math, reading storybooks, and organizing outdoor games. Last month, the club also held a small charity fair at school to <span class="blank-tag">(2) _______</span> funds for new textbooks and warm winter blankets.
+          </p>
+          <p>
+            At first, some students felt shy and <span class="blank-tag">(3) _______</span> because they had never worked with young kids before. However, after a few weeks, they learned how to communicate patiently and became much more confident. "Helping these kids makes me feel <span class="blank-tag">(4) _______</span> for my own family and education," shared Minh, the club leader. Through simple acts of kindness, young people not only improve their community <span class="blank-tag">(5) _______</span> also discover their own strengths.
+          </p>
+        </div>
+
+        <div id="questions-1"></div>
+
+        <!-- THANH XỔ TỪ VỰNG TRONG BÀI -->
+        <div class="vocab-accordion" id="vocab-acc-1">
+          <button class="vocab-toggle-btn" onclick="toggleVocab(1)">
+            <span>📚 Từ vựng trong bài (Passage 1 – Weekend Volunteers at Sunshine Shelter)</span>
+            <span class="vocab-arrow">▼</span>
+          </button>
+          <div class="vocab-content">
+            <table class="vocab-table" id="vocab-table-1"></table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 2: PASSAGE 2 ================= -->
+    <section id="panel-2" class="tab-panel">
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">A. READING – GUIDED CLOZE TEXT (Passage 2)</div>
+            <div class="section-desc">Bấm vào đáp án A, B, C hoặc D ở từng câu để kiểm tra kết quả ngay lập tức.</div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-sm primary" onclick="revealAllInTab(2, true)">👁️ Hiện tất cả đáp án</button>
+            <button class="btn-sm" onclick="revealAllInTab(2, false)">🔄 Làm lại</button>
+          </div>
+        </div>
+
+        <div class="passage-box">
+          <div class="passage-title">THE RISE OF VIRTUAL VOLUNTEERING</div>
+          <p>
+            While traditional charity work often requires physical presence at food banks or disaster zones, modern technology has enabled a flexible alternative known as virtual volunteering. Today, busy professionals, retired teachers, and university students can <span class="blank-tag">(6) _______</span> their expertise to non-profit organizations entirely online. For instance, graphic designers create promotional posters for animal rescues, while bilingual speakers translate educational materials for clinics in <span class="blank-tag">(7) _______</span> regions.
+          </p>
+          <p>
+            One major advantage of digital volunteering is that it removes geographical barriers, allowing people with physical disabilities to <span class="blank-tag">(8) _______</span> actively in meaningful social projects from home. Nevertheless, managing remote teams can sometimes prove challenging. Without face-to-face interaction, communication may become <span class="blank-tag">(9) _______</span> if project leaders fail to set clear deadlines. Despite these hurdles, virtual volunteering continues to grow rapidly, proving that anyone with an internet connection can <span class="blank-tag">(10) _______</span> a lasting difference in the world.
+          </p>
+        </div>
+
+        <div id="questions-2"></div>
+
+        <!-- THANH XỔ TỪ VỰNG TRONG BÀI -->
+        <div class="vocab-accordion" id="vocab-acc-2">
+          <button class="vocab-toggle-btn" onclick="toggleVocab(2)">
+            <span>📚 Từ vựng trong bài (Passage 2 – The Rise of Virtual Volunteering)</span>
+            <span class="vocab-arrow">▼</span>
+          </button>
+          <div class="vocab-content">
+            <table class="vocab-table" id="vocab-table-2"></table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 3: PHRASE / CLAUSE CLOZE ================= -->
+    <section id="panel-3" class="tab-panel">
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">B. PHRASE / CLAUSE CLOZE TEST</div>
+            <div class="section-desc">Bấm vào cụm từ / mệnh đề A, B, C hoặc D phù hợp nhất để xem đáp án và giải thích.</div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-sm primary" onclick="revealAllInTab(3, true)">👁️ Hiện tất cả đáp án</button>
+            <button class="btn-sm" onclick="revealAllInTab(3, false)">🔄 Làm lại</button>
+          </div>
+        </div>
+
+        <div class="passage-box">
+          <div class="passage-title">BUILDING A COMMUNITY LIBRARY FROM SCRATCH</div>
+          <p>
+            Two years ago, residents in Hoa Binh Village noticed that local children had almost no access to books outside their school classrooms. Determined to change this situation, a group of youth union members decided to transform an abandoned storage room <span class="blank-tag">(1) _______</span>.
+          </p>
+          <p>
+            The project started with a neighborhood donation drive. While senior students were cleaning and painting the dusty walls, younger volunteers <span class="blank-tag">(2) _______</span> from household to household. Within three weeks, the community had collected over 1,500 storybooks, encyclopedias, and comic books. Local carpenters also pitched in by building wooden bookshelves <span class="blank-tag">(3) _______</span>.
+          </p>
+          <p>
+            Today, the Green Leaf Community Library welcomes dozens of young readers every afternoon. Not only does the space encourage children to spend less time on smartphones, <span class="blank-tag">(4) _______</span> where teenagers can tutor primary pupils. This inspiring initiative demonstrates that when neighbors join hands, they can create <span class="blank-tag">(5) _______</span> without needing massive budgets.
+          </p>
+        </div>
+
+        <div id="questions-3"></div>
+
+        <!-- THANH XỔ TỪ VỰNG TRONG BÀI -->
+        <div class="vocab-accordion" id="vocab-acc-3">
+          <button class="vocab-toggle-btn" onclick="toggleVocab(3)">
+            <span>📚 Từ vựng trong bài (Part B – Building a Community Library from Scratch)</span>
+            <span class="vocab-arrow">▼</span>
+          </button>
+          <div class="vocab-content">
+            <table class="vocab-table" id="vocab-table-3"></table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 4: READING COMPREHENSION ================= -->
+    <section id="panel-4" class="tab-panel">
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">C. READING COMPREHENSION</div>
+            <div class="section-desc">Đọc bài đọc về mô hình "Friendly Fridges" tại New York và bấm chọn đáp án từng câu.</div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-sm primary" onclick="revealAllInTab(4, true)">👁️ Hiện tất cả đáp án</button>
+            <button class="btn-sm" onclick="revealAllInTab(4, false)">🔄 Làm lại</button>
+          </div>
+        </div>
+
+        <div class="passage-box">
+          <div class="passage-title">THE TEACHER BEHIND NEW YORK'S "FRIENDLY FRIDGES"</div>
+          <p>
+            In early 2020, Selma Guzman, an elementary school teacher in the Bronx, New York, noticed a heartbreaking problem in her neighborhood. While many families were struggling to buy daily groceries due to job losses, local restaurants and markets were throwing away large amounts of unsold fresh food. Determined to help her community, Guzman decided to bring the "community fridge" movement to her own street.
+          </p>
+          <p>
+            Using her own savings, Guzman bought a used refrigerator, painted it bright colors, and plugged it in outside a local grocery store with the owner's permission. She stocked it with milk, eggs, fresh vegetables, and bread, placing a simple sign on the door: "Free Food - Take What You Need, Leave What You Can". Within hours, the fridge was empty, and neighbors began asking how they could contribute.
+          </p>
+          <p>
+            What started as a single sidewalk refrigerator quickly grew into a city-wide network. Local volunteers, high school students, and small business owners joined hands to set up dozens of "Friendly Fridges" across New York City. While Selma was teaching her online classes during the day, community volunteers were cleaning the fridges, checking expiration dates, and restocking shelves with donated produce. Today, her simple grassroots initiative feeds hundreds of disadvantaged families every week and inspires teenagers to take practical action in their own neighborhoods.
+          </p>
+        </div>
+
+        <div id="questions-4"></div>
+
+        <!-- THANH XỔ TỪ VỰNG TRONG BÀI -->
+        <div class="vocab-accordion" id="vocab-acc-4">
+          <button class="vocab-toggle-btn" onclick="toggleVocab(4)">
+            <span>📚 Từ vựng trong bài (Part C – The Teacher Behind New York's "Friendly Fridges")</span>
+            <span class="vocab-arrow">▼</span>
+          </button>
+          <div class="vocab-content">
+            <table class="vocab-table" id="vocab-table-4"></table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script>
+  const tabsConfig = {
+    1: {
+      gridClass: "opts-grid-4",
+      questions: [
+        { num: "Câu 1", opts: ["A. wealthy", "B. disadvantaged", "C. generous", "D. careless"], ans: 1, exp: "<b>B. disadvantaged</b> (disadvantaged children: trẻ em có hoàn cảnh khó khăn, thiệt thòi)." },
+        { num: "Câu 2", opts: ["A. rise", "B. raise", "C. spend", "D. earn"], ans: 1, exp: "<b>B. raise</b> (collocation: raise funds = gây quỹ)." },
+        { num: "Câu 3", opts: ["A. inexperienced", "B. impossible", "C. dishonest", "D. illegal"], ans: 0, exp: "<b>A. inexperienced</b> (thiếu kinh nghiệm — phù hợp với ngữ cảnh 'because they had never worked with young kids before')." },
+        { num: "Câu 4", opts: ["A. harmful", "B. grateful", "C. hopeless", "D. annoyed"], ans: 1, exp: "<b>B. grateful</b> (feel grateful for: cảm thấy biết ơn về điều gì)." },
+        { num: "Câu 5", opts: ["A. and", "B. or", "C. so", "D. but"], ans: 3, exp: "<b>D. but</b> (cấu trúc song hành: not only ... but also ... = không những ... mà còn ...)." }
+      ],
+      vocab: [
+        { en: "shelter", pos: "n", vi: "mái ấm tình thương, nhà tình thương" },
+        { en: "disadvantaged", pos: "adj", vi: "thiệt thòi, có hoàn cảnh khó khăn" },
+        { en: "tutor", pos: "v, n", vi: "dạy kèm, gia sư" },
+        { en: "charity fair", pos: "np", vi: "hội chợ từ thiện" },
+        { en: "raise funds", pos: "vp", vi: "gây quỹ" },
+        { en: "inexperienced", pos: "adj", vi: "thiếu kinh nghiệm" },
+        { en: "patiently", pos: "adv", vi: "một cách kiên nhẫn" },
+        { en: "grateful (for/to)", pos: "adj", vi: "biết ơn" },
+        { en: "act of kindness", pos: "np", vi: "hành động tử tế, việc làm nhân ái" },
+        { en: "community", pos: "n", vi: "cộng đồng" }
+      ]
+    },
+    2: {
+      gridClass: "opts-grid-4",
+      questions: [
+        { num: "Câu 6", opts: ["A. suffer", "B. contribute", "C. benefit", "D. apply"], ans: 1, exp: "<b>B. contribute</b> (contribute something to someone/something: đóng góp chuyên môn cho các tổ chức phi lợi nhuận)." },
+        { num: "Câu 7", opts: ["A. urban", "B. central", "C. remote", "D. crowded"], ans: 2, exp: "<b>C. remote</b> (remote regions: các vùng sâu, vùng xa)." },
+        { num: "Câu 8", opts: ["A. participate", "B. attend", "C. join", "D. enter"], ans: 0, exp: "<b>A. participate</b> (đi với giới từ 'in' phía sau: participate actively in = tích cực tham gia vào)." },
+        { num: "Câu 9", opts: ["A. disorganized", "B. unexpected", "C. unnecessary", "D. unfair"], ans: 0, exp: "<b>A. disorganized</b> (thiếu tổ chức, rời rạc — khi trưởng nhóm không đặt ra thời hạn rõ ràng)." },
+        { num: "Câu 10", opts: ["A. do", "B. take", "C. give", "D. make"], ans: 3, exp: "<b>D. make</b> (collocation: make a lasting difference = tạo ra sự khác biệt bền vững)." }
+      ],
+      vocab: [
+        { en: "physical presence", pos: "np", vi: "sự có mặt trực tiếp" },
+        { en: "disaster zone", pos: "np", vi: "vùng thiên tai" },
+        { en: "alternative", pos: "n, adj", vi: "giải pháp thay thế" },
+        { en: "virtual volunteering", pos: "np", vi: "hoạt động tình nguyện trực tuyến" },
+        { en: "expertise", pos: "n", vi: "kiến thức chuyên môn, sự thành thạo" },
+        { en: "non-profit organization", pos: "np", vi: "tổ chức phi lợi nhuận" },
+        { en: "promotional poster", pos: "np", vi: "áp phích quảng bá" },
+        { en: "geographical barrier", pos: "np", vi: "rào cản địa lý" },
+        { en: "physical disability", pos: "np", vi: "khuyết tật về thể chất" },
+        { en: "disorganized", pos: "adj", vi: "thiếu tổ chức, lộn xộn" },
+        { en: "make a difference", pos: "vp", vi: "tạo nên sự khác biệt" }
+      ]
+    },
+    3: {
+      gridClass: "opts-grid-1",
+      questions: [
+        {
+          num: "Câu 1",
+          opts: [
+            "A. into a bright and welcoming reading space",
+            "B. for selling handmade items to tourists",
+            "C. by raising money for homeless people",
+            "D. with expensive computers and tablets"
+          ],
+          ans: 0,
+          exp: "<b>A. into a bright and welcoming reading space</b> (Cấu trúc: <i>transform A into B</i> = biến đổi nhà kho bỏ hoang thành không gian đọc sách sáng sủa, thân thiện)."
+        },
+        {
+          num: "Câu 2",
+          opts: [
+            "A. are collecting unwanted clothes and shoes",
+            "B. were gathering used books and magazines",
+            "C. will deliver free meals to poor families",
+            "D. have built a new playground for kids"
+          ],
+          ans: 1,
+          exp: "<b>B. were gathering used books and magazines</b> (Hòa hợp thì Quá khứ tiếp diễn diễn tả hai hành động diễn ra song song với <i>While</i>, và khớp với ý thu gom sách ở câu sau)."
+        },
+        {
+          num: "Câu 3",
+          opts: [
+            "A. which were completely useless for reading",
+            "B. because they wanted to charge entry fees",
+            "C. free of charge for the young readers",
+            "D. although nobody wanted to visit the room"
+          ],
+          ans: 2,
+          exp: "<b>C. free of charge for the young readers</b> (Thợ mộc địa phương chung tay đóng kệ sách gỗ miễn phí cho các bạn nhỏ)."
+        },
+        {
+          num: "Câu 4",
+          opts: [
+            "A. or it becomes a quiet place for elderly people",
+            "B. so it stops students from playing sports",
+            "C. yet it fails to attract local families",
+            "D. but it also serves as a study hub"
+          ],
+          ans: 3,
+          exp: "<b>D. but it also serves as a study hub</b> (Cấu trúc đảo ngữ đầu câu: <i>Not only does + S + V, but + S + also + V</i>)."
+        },
+        {
+          num: "Câu 5",
+          opts: [
+            "A. temporary problems for the whole village",
+            "B. practical and sustainable community solutions",
+            "C. unnecessary rules for school children",
+            "D. disappointing results for the organizers"
+          ],
+          ans: 1,
+          exp: "<b>B. practical and sustainable community solutions</b> (Các giải pháp cộng đồng thiết thực và bền vững mà không cần ngân sách khổng lồ)."
+        }
+      ],
+      vocab: [
+        { en: "from scratch", pos: "idm", vi: "từ đầu, từ con số không" },
+        { en: "resident", pos: "n", vi: "cư dân, người dân địa phương" },
+        { en: "access to", pos: "np", vi: "sự tiếp cận với" },
+        { en: "abandoned", pos: "adj", vi: "bị bỏ hoang" },
+        { en: "donation drive", pos: "np", vi: "chiến dịch quyên góp" },
+        { en: "encyclopedia", pos: "n", vi: "bách khoa toàn thư" },
+        { en: "pitch in", pos: "pv", vi: "chung tay góp sức" },
+        { en: "free of charge", pos: "adv/adj", vi: "miễn phí" },
+        { en: "study hub", pos: "np", vi: "trung tâm / không gian học tập" },
+        { en: "join hands", pos: "vp", vi: "chung tay, đoàn kết" },
+        { en: "sustainable", pos: "adj", vi: "bền vững" }
+      ]
+    },
+    4: {
+      gridClass: "opts-grid-1",
+      questions: [
+        {
+          num: "1. What is the passage mainly about?",
+          opts: [
+            "A. How a New York teacher started a free community fridge project to fight hunger",
+            "B. Why grocery stores in the Bronx decided to close down in 2020",
+            "C. The difficulties of teaching elementary students online during the day",
+            "D. How to repair old refrigerators and sell them to local markets"
+          ],
+          ans: 0,
+          exp: "<b>A. How a New York teacher started a free community fridge project to fight hunger</b> (Toàn bài kể về cách cô giáo Selma Guzman ở New York khởi xướng tủ lạnh cộng đồng miễn phí để giúp các gia đình khó khăn chống đói)."
+        },
+        {
+          num: "2. How did Selma Guzman get the very first refrigerator for her project?",
+          opts: [
+            "A. She received it as a gift from a big supermarket chain.",
+            "B. She used her own money to buy a second-hand one.",
+            "C. Her students raised funds at school to purchase it.",
+            "D. The local city government donated it to her school."
+          ],
+          ans: 1,
+          exp: "<b>B. She used her own money to buy a second-hand one.</b> (Dẫn chứng đoạn 2: <i>'Using her own savings, Guzman bought a used refrigerator...'</i> = dùng tiền tiết kiệm riêng mua một chiếc tủ lạnh cũ)."
+        },
+        {
+          num: "3. The word \"it\" in paragraph 2 refers to",
+          opts: [
+            "A. her savings",
+            "B. the grocery store",
+            "C. the used refrigerator",
+            "D. the simple sign"
+          ],
+          ans: 2,
+          exp: "<b>C. the used refrigerator</b> (Dẫn chứng: <i>'Guzman bought a used refrigerator, painted it bright colors, and plugged it in... She stocked it with milk, eggs...'</i>)."
+        },
+        {
+          num: "4. The word \"grassroots\" in paragraph 3 is CLOSEST in meaning to",
+          opts: [
+            "A. community-based",
+            "B. expensive",
+            "C. government-funded",
+            "D. commercial"
+          ],
+          ans: 0,
+          exp: "<b>A. community-based</b> (<i>grassroots initiative</i> = sáng kiến xuất phát từ người dân/cộng đồng cơ sở — lưu ý trong bản in gốc có lỗi đánh máy ở 4 phương án câu 4, đáp án chuẩn nghĩa học thuật của 'grassroots' là xuất phát từ cộng đồng/người dân)."
+        },
+        {
+          num: "5. According to paragraph 3, what did community volunteers do while Selma Guzman was teaching?",
+          opts: [
+            "A. They painted bright pictures on school walls.",
+            "B. They delivered cooked meals to local teachers.",
+            "C. They kept the fridges clean and refilled them with donated food.",
+            "D. They collected money from disadvantaged families."
+          ],
+          ans: 2,
+          exp: "<b>C. They kept the fridges clean and refilled them with donated food.</b> (Dẫn chứng đoạn 3: <i>'community volunteers were cleaning the fridges, checking expiration dates, and restocking shelves with donated produce'</i>)."
+        }
+      ],
+      vocab: [
+        { en: "elementary school", pos: "np", vi: "trường tiểu học" },
+        { en: "heartbreaking", pos: "adj", vi: "đau lòng, thương tâm" },
+        { en: "struggle (to V)", pos: "v", vi: "vật lộn, chật vật" },
+        { en: "groceries", pos: "n", vi: "thực phẩm và nhu yếu phẩm hàng ngày" },
+        { en: "savings", pos: "n", vi: "tiền tiết kiệm" },
+        { en: "permission", pos: "n", vi: "sự cho phép" },
+        { en: "sidewalk", pos: "n", vi: "vỉa hè" },
+        { en: "expiration date", pos: "np", vi: "hạn sử dụng" },
+        { en: "restock", pos: "v", vi: "bổ sung, chất đầy lại hàng hóa/thực phẩm" },
+        { en: "produce", pos: "n", vi: "nông sản, rau củ quả tươi" },
+        { en: "grassroots initiative", pos: "np", vi: "sáng kiến cộng đồng từ cơ sở" }
+      ]
+    }
+  };
+
+  // Chuyển Tab
+  function switchTab(tabNum) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(`panel-${tabNum}`).classList.add('active');
+    document.getElementById(`tab-btn-${tabNum}`).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Render Câu hỏi cho từng Tab
+  function renderTabQuestions(tabNum) {
+    const config = tabsConfig[tabNum];
+    const container = document.getElementById(`questions-${tabNum}`);
+    container.innerHTML = config.questions.map((q, qIdx) => {
+      const optsHtml = q.opts.map((optText, oIdx) => `
+        <button class="opt-btn" id="t${tabNum}-q${qIdx}-o${oIdx}" onclick="handleOptionClick(${tabNum}, ${qIdx}, ${oIdx})">
+          <span>${optText}</span>
+        </button>
+      `).join("");
+
+      return `
+        <div class="q-card">
+          <div class="q-top">
+            <span class="q-label">${q.num}</span>
+            <button class="btn-sm" onclick="revealSingleQuestion(${tabNum}, ${qIdx})">👁️ Xem đáp án</button>
+          </div>
+          <div class="${config.gridClass}">${optsHtml}</div>
+          <div class="exp-box" id="t${tabNum}-exp-${qIdx}">✅ Đáp án: ${q.exp}</div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  // Bấm vào phương án nào thì tô màu & show đáp án câu đó
+  function handleOptionClick(tabNum, qIdx, chosenIdx) {
+    const q = tabsConfig[tabNum].questions[qIdx];
+    q.opts.forEach((_, oIdx) => {
+      const btn = document.getElementById(`t${tabNum}-q${qIdx}-o${oIdx}`);
+      btn.classList.remove('correct', 'wrong');
+      if (oIdx === q.ans) {
+        btn.classList.add('correct');
+      } else if (oIdx === chosenIdx && chosenIdx !== q.ans) {
+        btn.classList.add('wrong');
+      }
+    });
+    document.getElementById(`t${tabNum}-exp-${qIdx}`).classList.add('show');
+  }
+
+  // Bấm nút Xem đáp án từng câu
+  function revealSingleQuestion(tabNum, qIdx) {
+    const q = tabsConfig[tabNum].questions[qIdx];
+    q.opts.forEach((_, oIdx) => {
+      const btn = document.getElementById(`t${tabNum}-q${qIdx}-o${oIdx}`);
+      btn.classList.remove('correct', 'wrong');
+      if (oIdx === q.ans) btn.classList.add('correct');
+    });
+    document.getElementById(`t${tabNum}-exp-${qIdx}`).classList.add('show');
+  }
+
+  // Hiện/Ẩn tất cả đáp án trong 1 Tab
+  function revealAllInTab(tabNum, show) {
+    const questions = tabsConfig[tabNum].questions;
+    questions.forEach((q, qIdx) => {
+      q.opts.forEach((_, oIdx) => {
+        const btn = document.getElementById(`t${tabNum}-q${qIdx}-o${oIdx}`);
+        btn.classList.remove('correct', 'wrong');
+        if (show && oIdx === q.ans) btn.classList.add('correct');
+      });
+      const exp = document.getElementById(`t${tabNum}-exp-${qIdx}`);
+      if (show) exp.classList.add('show');
+      else exp.classList.remove('show');
+    });
+  }
+
+  // Render Bảng Từ Vựng Xổ Xuống cho từng Tab
+  function renderTabVocab(tabNum) {
+    const vocabList = tabsConfig[tabNum].vocab;
+    const table = document.getElementById(`vocab-table-${tabNum}`);
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th style="width: 34%;">Tiếng Anh</th>
+          <th style="width: 18%;">Từ loại</th>
+          <th style="width: 48%;">Nghĩa tiếng Việt</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${vocabList.map(v => {
+          const cleanWord = v.en.replace(/\(.*\)/g, "").trim();
+          return `
+            <tr>
+              <td>
+                <b>${v.en}</b>
+                <button class="speak-btn" onclick="speakText('${cleanWord.replace(/'/g, "\'")}')" title="Nghe phát âm">🔊</button>
+              </td>
+              <td><span class="pos-pill">${v.pos}</span></td>
+              <td>${v.vi}</td>
+            </tr>
+          `;
+        }).join("")}
+      </tbody>
+    `;
+  }
+
+  // Mở / Đóng thanh xổ "Từ vựng trong bài"
+  function toggleVocab(tabNum) {
+    const acc = document.getElementById(`vocab-acc-${tabNum}`);
+    acc.classList.toggle('open');
+  }
+
+  // Phát âm tiếng Anh
+  function speakText(text) {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      u.rate = 0.92;
+      window.speechSynthesis.speak(u);
+    }
+  }
+
+  // Khởi tạo 4 Tab
+  [1, 2, 3, 4].forEach(num => {
+    renderTabQuestions(num);
+    renderTabVocab(num);
+  });
+</script>
+</body>
+</html>
